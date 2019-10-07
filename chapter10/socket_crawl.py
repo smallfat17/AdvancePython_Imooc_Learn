@@ -26,7 +26,7 @@ def crawl(url):
 
 if __name__ == '__main__':
     url = 'http://120.78.187.183/'
-    # crawl(url)
+    crawl(url)
     import requests
     from lxml import etree
     res = requests.get(url)

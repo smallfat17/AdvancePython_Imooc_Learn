@@ -1,10 +1,11 @@
 #高并发爬虫
-
 import asyncio
+import os
+
 import aiohttp
 import aiomysql
-
 from lxml import etree
+
 
 start_url = 'http://www.baidu.com'
 waiting_urls = []
@@ -57,12 +58,11 @@ async def comsumer(pool):
             asyncio.ensure_future(fetch(url, pool))
             await asyncio.sleep(0.5)
 
-
 async def init_spider(pool):
     await fetch(start_url, pool)
 
 async def main():
-    pool = await aiomysql.create_pool(host='localhost', user='smallfat', password='jmw123', db='aio_spider', port=3306, charset='utf8', autocommit=True)
+    pool = await aiomysql.create_pool(host='localhost', user='smallfat', password=os.getenv('MYSQL_USER_PASSWORD'), db='aio_spider', port=3306, charset='utf8', autocommit=True)
     asyncio.ensure_future(init_spider(pool))
     asyncio.ensure_future(comsumer(pool))
 

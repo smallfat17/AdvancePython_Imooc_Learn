@@ -12,9 +12,6 @@ class Person():
     # def __getattribute__(self, item):
     #     return 'aaa'
 
-
-
-
 import numbers
 #访问类属性优先级
 #属性描述符->对象的__dict__ -> 类的__dict__ -> 非属性描述符 -> __getattr__
